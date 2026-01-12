@@ -361,7 +361,7 @@ h1::after {
 
 .track-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     padding: 2rem;
     width: 100%;
@@ -379,6 +379,8 @@ h1::after {
     gap: 2rem;
     padding: 0 2rem;
     opacity: 0;
+    flex-wrap: wrap;
+    /* Allow wrapping if needed, though usually direct children are controlled */
 }
 
 /* Active State */
@@ -413,11 +415,32 @@ h1::after {
 
 .track-lyrics {
     flex: 1;
+    min-width: 300px;
+    /* Prevent it from getting too small */
     font-family: var(--font-mono);
     font-size: 0.8rem;
     color: #aaa;
     border-left: 1px solid #333;
     padding-left: 1.5rem;
+}
+
+.track-video {
+    flex: 1;
+    min-width: 300px;
+    border-left: 1px solid #333;
+    padding-left: 1.5rem;
+}
+
+.track-video h3 {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+.track-video iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 1px solid #333;
 }
 
 .track-lyrics h3 {
@@ -453,6 +476,21 @@ h1::after {
 .track-item:hover::before {
     transform: scaleY(1);
     transform-origin: top;
+}
+
+.track-thumbnail {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 1.5rem;
+    border: 1px solid #333;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+}
+
+.track-item:hover .track-thumbnail,
+.track-item.active .track-thumbnail {
+    filter: grayscale(0%);
 }
 
 .track-info .track-num {
@@ -503,7 +541,7 @@ footer {
 }
 
 /* Media Queries */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     h1 {
         font-size: 3rem;
     }
@@ -550,8 +588,6 @@ footer {
     .bio-text {
         padding-left: 1rem;
         border-left: 1px solid #333;
-        border-left: 1px solid #333;
-        /* Keep minimal border */
     }
 
     .about-content {
@@ -562,13 +598,11 @@ footer {
     .profile-image {
         width: 100%;
         max-width: 300px;
-        /* Keep it reasonable on mobile */
         margin: 0 auto;
         flex: none;
     }
 
     .track-item {
-        /* Reset flex direction on mobile for the container, internal layout handles it */
         display: block;
         padding: 0;
     }
@@ -579,12 +613,18 @@ footer {
 
     .track-item:hover {
         padding-left: 0;
-        /* Disable shift on mobile */
     }
 
     .track-details {
-        flex-direction: column;
+        display: flex !important;
+        flex-direction: column !important;
         gap: 1rem;
+        padding: 0 1.5rem 1.5rem 1.5rem;
+        /* Adjust padding for mobile */
+    }
+
+    .track-item.active .track-details {
+        padding: 0 1.5rem 1.5rem 1.5rem;
     }
 
     .track-jacket {
@@ -592,12 +632,29 @@ footer {
         height: auto;
         aspect-ratio: 1/1;
         flex: none;
+        border: none;
+        border-bottom: 1px solid #333;
+        /* Separator if needed */
     }
 
     .track-lyrics {
         border-left: none;
+        border-top: none;
+        /* Jacket has border-bottom? Or just use top here */
+        padding-left: 0;
+        padding-top: 1rem;
+        min-width: 0;
+        flex: none;
+        width: 100%;
+    }
+
+    .track-video {
+        border-left: none;
         border-top: 1px solid #333;
         padding-left: 0;
         padding-top: 1rem;
+        min-width: 0;
+        flex: none;
+        width: 100%;
     }
 }
