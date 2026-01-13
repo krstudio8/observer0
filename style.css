@@ -143,7 +143,7 @@ body::before {
     mix-blend-mode: overlay;
 }
 
-/* Glitch Effect - Robust Implementation */
+/* Title Aesthetic: Scramble effect (JS) */
 .glitch-wrapper {
     position: relative;
     display: inline-block;
@@ -155,84 +155,6 @@ h1 {
     position: relative;
     color: var(--text-color);
     letter-spacing: -0.05em;
-}
-
-h1::before,
-h1::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--bg-color);
-}
-
-h1::before {
-    left: 2px;
-    text-shadow: -1px 0 #ff00c1;
-    clip-path: inset(44% 0 61% 0);
-    animation: glitch-anim-1 2.5s infinite linear alternate-reverse;
-}
-
-h1::after {
-    left: -2px;
-    text-shadow: -1px 0 #00fff9;
-    clip-path: inset(15% 0 88% 0);
-    animation: glitch-anim-2 3s infinite linear alternate-reverse;
-}
-
-/* Keyframes for Glitch */
-@keyframes glitch-anim-1 {
-    0% {
-        clip-path: inset(20% 0 30% 0);
-    }
-
-    20% {
-        clip-path: inset(60% 0 10% 0);
-    }
-
-    40% {
-        clip-path: inset(40% 0 50% 0);
-    }
-
-    60% {
-        clip-path: inset(80% 0 5% 0);
-    }
-
-    80% {
-        clip-path: inset(10% 0 70% 0);
-    }
-
-    100% {
-        clip-path: inset(30% 0 20% 0);
-    }
-}
-
-@keyframes glitch-anim-2 {
-    0% {
-        clip-path: inset(15% 0 60% 0);
-    }
-
-    20% {
-        clip-path: inset(80% 0 5% 0);
-    }
-
-    40% {
-        clip-path: inset(30% 0 10% 0);
-    }
-
-    60% {
-        clip-path: inset(50% 0 40% 0);
-    }
-
-    80% {
-        clip-path: inset(10% 0 80% 0);
-    }
-
-    100% {
-        clip-path: inset(70% 0 20% 0);
-    }
 }
 
 .subtitle {
