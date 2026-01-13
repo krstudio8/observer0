@@ -638,10 +638,38 @@ footer {
         padding-left: 0;
         padding-top: 1rem;
     }
+
+    #hero {
+        min-height: 90vh;
+        justify-content: flex-start;
+        padding-top: 8rem;
+    }
+
     .hero-visual {
-        max-height: 50vh;
+        max-height: 65vh;
         width: auto;
-        max-width: 80%;
-        margin-bottom: 1rem;
+        max-width: 100%;
+        margin-bottom: 0;
+    }
+
+    #hero h1 {
+        position: absolute;
+        bottom: 15%;
+        left: 0;
+        width: 100%;
+        font-size: clamp(2.2rem, 12vw, 4rem);
+        text-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
+        z-index: 10;
+        margin-bottom: 0;
+    }
+
+    .subtitle {
+        margin-top: 2rem;
+    }
+
+    .track-info .track-num {
+        display: block;
+        margin-right: 0;
+        margin-bottom: 0.2rem;
     }
 }
