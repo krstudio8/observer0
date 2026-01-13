@@ -119,6 +119,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Language Toggle Logic
+    const langToggles = document.querySelectorAll('.lang-toggle');
+    langToggles.forEach(toggle => {
+        const targetId = toggle.dataset.for;
+        const targetElement = document.getElementById(targetId);
+        const buttons = toggle.querySelectorAll('button');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent accordion from closing
+
+                if (btn.classList.contains('active')) return;
+
+                const lang = btn.dataset.lang;
+                const newLyrics = targetElement.getAttribute(`data-lyrics-${lang}`);
+
+                // Update active button
+                buttons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Trigger Scramble with new text
+                // We manually set textContent once if scrambling is long, 
+                // but let's try calling scrambleText directly
+                targetElement.textContent = newLyrics;
+                scrambleText(targetElement);
+            });
+        });
+    });
+
     // Glitch Effect Randomizer (Subtle)
     const title = document.querySelector('h1');
     if (title) {
