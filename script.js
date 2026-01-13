@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
 
-                // Trigger Text Scramble for headers
-                const header = entry.target.querySelector('h2');
+                // Trigger Text Scramble for headers (h1 or h2)
+                const header = entry.target.querySelector('h1, h2');
                 if (header) {
                     scrambleText(header);
                 }
