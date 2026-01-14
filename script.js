@@ -62,30 +62,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 30);
     }
 
-    // Custom Cursor
-    const cursor = document.createElement('div');
-    cursor.classList.add('custom-cursor');
-    document.body.appendChild(cursor);
+    // Custom Cursor (Only for devices with hover capability, e.g., desktop with mouse)
+    const isHoverCapable = window.matchMedia('(hover: hover)').matches;
 
-    document.addEventListener('mousemove', (e) => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-    });
+    if (isHoverCapable) {
+        const cursor = document.createElement('div');
+        cursor.classList.add('custom-cursor');
+        document.body.appendChild(cursor);
 
-    const hoverElements = document.querySelectorAll('a, button'); // Removed .track-item from here to handle manually
-    hoverElements.forEach(el => {
-        el.addEventListener('mouseenter', () => cursor.classList.add('active'));
-        el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
-    });
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
 
-    // Track Item Accordion & Cursor Logic
+        const hoverElements = document.querySelectorAll('a, button');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+        });
+
+        // Track Item Cursor Logic (Special handling for hover)
+        const trackItems = document.querySelectorAll('.track-item');
+        trackItems.forEach(item => {
+            item.addEventListener('mouseenter', () => cursor.classList.add('active'));
+            item.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+        });
+    }
+
+    // Track Item Accordion Logic (Universal)
     const trackItems = document.querySelectorAll('.track-item');
 
     trackItems.forEach(item => {
-        // Cursor Effect
-        item.addEventListener('mouseenter', () => cursor.classList.add('active'));
-        item.addEventListener('mouseleave', () => cursor.classList.remove('active'));
-
         // Accordion Click
         item.addEventListener('click', (e) => {
             // Prevent triggering if clicking links inside
